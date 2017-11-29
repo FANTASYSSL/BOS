@@ -23,10 +23,12 @@
 	type="text/css" />
 <script
 	src="${pageContext.request.contextPath }/js/ztree/jquery.ztree.all-3.5.js"
-	type="text/javascript"></script>
+	type="text/javascript">
+</script>
 <script
 	src="${pageContext.request.contextPath }/js/easyui/locale/easyui-lang-zh_CN.js"
-	type="text/javascript"></script>
+	type="text/javascript">
+</script>
 <script type="text/javascript">
 	// 初始化ztree菜单
 	$(function() {
@@ -200,7 +202,7 @@
 				style="width:100%;height:100%;overflow:hidden">
 				<iframe src="${pageContext.request.contextPath }/page_common_home.action"
 					style="width:100%;height:100%;border:0;"></iframe>
-				<%--				这里显示公告栏、预警信息和代办事宜--%>
+				<%--这里显示公告栏、预警信息和代办事宜--%>
 			</div>
 		</div>
 	</div>
