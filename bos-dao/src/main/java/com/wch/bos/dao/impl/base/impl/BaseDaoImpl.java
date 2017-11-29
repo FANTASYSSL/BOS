@@ -12,6 +12,7 @@ import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
 import com.wch.bos.dao.impl.base.IBaseDao;
 
+@SuppressWarnings("all")
 public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T> {
 
 	private Class<T> entityClass;
@@ -21,41 +22,36 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T> {
 		super.setSessionFactory(sessionFactory);
 	}
 	
-	
-	public BaseDaoImpl(Class<T> entityClass) {
+	public BaseDaoImpl() {
 		ParameterizedType superClass = (ParameterizedType) this.getClass().getGenericSuperclass();
-		Type[] types = superClass.getActualTypeArguments();
-		
+		Type[] actualTypeArguments = superClass.getActualTypeArguments();
+		entityClass = (Class<T>) actualTypeArguments[0];
 	}
 
 	@Override
 	public void save(T entity) {
-		// TODO Auto-generated method stub
-
+		this.getHibernateTemplate().save(entity);
 	}
 
 	@Override
 	public void update(T entity) {
-		// TODO Auto-generated method stub
-
+		this.getHibernateTemplate().update(entity);
 	}
 
 	@Override
 	public void delete(T entity) {
-		// TODO Auto-generated method stub
-
+		this.getHibernateTemplate().delete(entity);
 	}
 
 	@Override
 	public T findById(Serializable id) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getHibernateTemplate().get(entityClass, id);
 	}
 
 	@Override
 	public List<T> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		String hql = "FROM " + entityClass.getSimpleName(); 
+		return (List<T>) this.getHibernateTemplate().find(hql);
 	}
 
 }

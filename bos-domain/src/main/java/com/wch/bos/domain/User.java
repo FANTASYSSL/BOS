@@ -6,6 +6,7 @@ import java.util.Date;
  * User entity. @author MyEclipse Persistence Tools
  */
 
+@SuppressWarnings("serial")
 public class User implements java.io.Serializable {
 
 	// Fields
