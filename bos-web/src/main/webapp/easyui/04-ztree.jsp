@@ -9,8 +9,9 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/js/easyui/themes/icon.css">
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.8.3.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/easyui/jquery.easyui.min.js"></script>
-<%-- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/js/ztree/zTreeStyle.css" />
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/ztree/jquery.ztree.all-3.5.js" /> --%>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/js/ztree/zTreeStyle.css" type="text/css">
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/ztree/jquery.ztree.all-3.5.js"></script>
+
 </head>
 <body class="easyui-layout">
 	<!-- 使用div元素描述每个区域 -->
@@ -42,8 +43,75 @@
 				</script>
 				
 			</div>
-			<div title="面板二">2222</div>
-			<div title="面板三">3333</div>
+			<div title="面板二">
+				<ul id="ztree1" class="ztree"></ul>
+				<script type="text/javascript">
+					$(function(){
+						var setting={};
+						var zNodes = [
+						              {"name":"节点一"},
+						              {"name":"节点一"},
+						              {"name":"节点一"}
+						              ];
+						$.fn.zTree.init($("#ztree1"), setting, zNodes);
+					})
+				</script>
+			</div>
+			<div title="面板三">
+				<ul id="ztree2" class="ztree"></ul>
+				<script type="text/javascript">
+					$(function(){
+						var setting={
+								data: {
+									simpleData: {
+										enable: true,
+									}
+								}
+						};
+						var zNodes = [
+						              {"id":"1","pId":"0","name":"节点1"},
+						              {"id":"2","pId":"1","name":"节点2"},
+						              {"id":"3","pId":"2","name":"节点3"}
+						              ];
+						$.fn.zTree.init($("#ztree2"), setting, zNodes);
+					})
+				</script>
+			</div>
+			<div title="面板四">
+				<ul id="ztree3" class="ztree"></ul>
+				<script type="text/javascript">
+					$(function(){
+						var setting3={
+								data: {
+									simpleData: {
+										enable: true
+									}
+								},
+								callback: {
+									onClick: function(event, treeId, treeNode) {
+										if (treeNode.page != undefined) {
+											var e = $("#mytabs").tabs("exists",treeNode.name);
+											if (e) {
+												$("#mytabs").tabs("select",treeNode.name);
+											} else {
+												$("#mytabs").tabs("add",{
+													title:treeNode.name,
+													//iconCls:"icon-edit",
+													closable:true,
+													content:'<iframe frameborder="0" height="100%" width="100%" src="'+treeNode.page+'"></iframe>'
+												})
+											}
+										}
+									}
+								}
+						};
+						var url = "${pageContext.request.contextPath }/json/menu.json";
+						$.post(url,{},function(data){
+							$.fn.zTree.init($("#ztree3"), setting3, data);
+						});
+					})
+				</script>
+			</div>
 		</div>
 	</div>
 	<div data-options="region:'center'">

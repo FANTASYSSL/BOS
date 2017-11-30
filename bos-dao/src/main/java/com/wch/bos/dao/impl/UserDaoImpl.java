@@ -3,12 +3,13 @@ package com.wch.bos.dao.impl;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 
 import com.wch.bos.dao.IUserDao;
 import com.wch.bos.dao.impl.base.impl.BaseDaoImpl;
 import com.wch.bos.domain.User;
 
-@Controller
+@Repository
 public class UserDaoImpl extends BaseDaoImpl<User> implements IUserDao {
 
 	@Override
