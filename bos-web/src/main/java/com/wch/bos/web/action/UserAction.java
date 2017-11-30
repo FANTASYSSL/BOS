@@ -13,7 +13,7 @@ import com.wch.bos.web.action.base.BaseAction;
 @SuppressWarnings("serial")
 @Controller
 @Scope("prototype")
-public class UserActioin extends BaseAction<User> {
+public class UserAction extends BaseAction<User> {
 	
 	@Autowired
 	private IUserService userService;
