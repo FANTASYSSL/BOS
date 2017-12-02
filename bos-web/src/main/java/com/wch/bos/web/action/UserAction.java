@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 
 import com.wch.bos.domain.User;
 import com.wch.bos.service.IUserService;
+import com.wch.bos.utils.BOSUtils;
 import com.wch.bos.web.action.base.BaseAction;
 
 @SuppressWarnings("serial")
@@ -21,7 +22,7 @@ public class UserAction extends BaseAction<User> {
 	private String checkCode;
 	
 	public String login(){
-		String validateCode = (String) ServletActionContext.getRequest().getSession().getAttribute("key");
+		String validateCode = (String) BOSUtils.getSession().getAttribute("key");
 		
 		if (StringUtils.isNotBlank(validateCode) && validateCode.equals(checkCode)) {
 			
@@ -39,12 +40,18 @@ public class UserAction extends BaseAction<User> {
 		}
 	}
 	
-	
-
-	public void setCheckCode(String checkCode) {
-		this.checkCode = checkCode;
+	public String logout(){
+		BOSUtils.getSession().invalidate();
+		return LOGIN;
 	}
 	
 	
+	public void setCheckCode(String checkCode) {
+		this.checkCode = checkCode;
+	}
+
+	public String getCheckCode() {
+		return checkCode;
+	}
 	
 }

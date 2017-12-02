@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="/struts-tags"  prefix="s"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -59,7 +60,7 @@ input[type=password] {
 			</div>
 			<div class="loginForm">
 				<form id="loginform" name="loginform" method="post" class="niceform"
-					action="">
+					action="userAction_login.action">
 					<div id="idInputLine" class="loginFormIpt showPlaceholder"
 						style="margin-top: 5px;">
 						<input id="loginform:idInput" type="text" name="username"
@@ -77,15 +78,21 @@ input[type=password] {
 						<div id="codeInputLine" class="loginFormIpt showPlaceholder"
 							style="margin-left:0px;margin-top:-40px;width:50px;">
 							<input id="loginform:codeInput" class="loginFormTdIpt" type="text"
-								name="checkcode" title="请输入验证码" />
+								name="checkCode" title="请输入验证码" />
 							<img id="loginform:vCode" src="${pageContext.request.contextPath }/validatecode.jsp"
 								onclick="javascript:document.getElementById('loginform:vCode').src='${pageContext.request.contextPath }/validatecode.jsp?'+Math.random();" />
 						</div>
-						<a href="${pageContext.request.contextPath}/page_common_index.action" id="loginform:j_id19" name="loginform:j_id19">
+						<a onclick='$("#loginform").submit()' href="javascript:void(0);" id="loginform:j_id19" name="loginform:j_id19">
 						<span
 							id="loginform:loginBtn" class="btn btn-login"
 							style="margin-top:-36px;">登录</span>
 						</a>
+					</div>
+					<div>
+						<br>
+						<font style="color: red;text-align: center;">
+							<s:actionerror/>
+						</font>
 					</div>
 				</form>
 			</div>
