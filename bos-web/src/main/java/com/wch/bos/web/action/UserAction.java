@@ -45,7 +45,6 @@ public class UserAction extends BaseAction<User> {
 		return LOGIN;
 	}
 	
-	
 	public void setCheckCode(String checkCode) {
 		this.checkCode = checkCode;
 	}
