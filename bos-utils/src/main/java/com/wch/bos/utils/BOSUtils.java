@@ -13,7 +13,8 @@ public class BOSUtils {
 	}
 	
 	public static User getLoinUser(){
-		return (User) getSession().getAttribute("loginUser");
+		Object object = getSession().getAttribute("loginUser");
+		return (User) (object == null?null:object);
 	}
 	
 }

@@ -1,5 +1,7 @@
 package com.wch.bos.web.action;
 
+import java.io.IOException;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +40,20 @@ public class UserAction extends BaseAction<User> {
 			this.addActionError("输入的验证码错误！");
 			return LOGIN;
 		}
+	}
+	
+	public String editPassword() throws IOException {
+		String flag = "1";
+		User user = BOSUtils.getLoinUser();
+		try {
+			userService.editPassword(user.getId(),model.getPassword());
+		} catch (Exception e) {
+			flag = "0";
+			e.printStackTrace();
+		}
+		ServletActionContext.getResponse().setContentType("text/html;charset=utf-8");
+		ServletActionContext.getResponse().getWriter().print(flag);;
+		return NONE;
 	}
 	
 	public String logout(){

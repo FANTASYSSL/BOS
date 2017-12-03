@@ -85,10 +85,25 @@
 		
 		$("#btnCancel").click(function(){
 			$('#editPwdWindow').window('close');
-		});
+		}); 
 		
 		$("#btnEp").click(function(){
-			alert("修改密码");
+			var e = $("#editPasswordForm").form("validate");
+			if (e) {
+				var v1 = $("#txtNewPass").val();
+				var v2 = $("#txtRePass").val();
+				if (v1 == v2) {
+					$.post("userAction_editPassword",{"password":v1},function(data){
+						if (data == '1') {
+							$("#editPwdWindow").window("close");
+						} else {
+							$.messager.alert("提示信息","密码修改失败","error");
+						}
+					})
+				}else{
+					$.messager.alert("提示信息","两次密码输入不一致！","warning");
+				}
+			}			
 		});
 	});
 
@@ -231,16 +246,18 @@
         background: #fafafa">
         <div class="easyui-layout" fit="true">
             <div region="center" border="false" style="padding: 10px; background: #fff; border: 1px solid #ccc;">
-                <table cellpadding=3>
-                    <tr>
-                        <td>新密码：</td>
-                        <td><input id="txtNewPass" type="Password" class="txt01" /></td>
-                    </tr>
-                    <tr>
-                        <td>确认密码：</td>
-                        <td><input id="txtRePass" type="Password" class="txt01" /></td>
-                    </tr>
-                </table>
+	             <form id="editPasswordForm">
+	                <table cellpadding=3>
+	                    <tr>
+	                        <td>新密码：</td>
+	                        <td><input id="txtNewPass" data-options="validType:'length[4,6]',required:'true'" type="Password" class="txt01 easyui-validatebox" /></td>
+	                    </tr>
+	                    <tr>
+	                        <td>确认密码：</td>
+	                        <td><input id="txtRePass" data-options="validType:'length[4,6]',required:'true'" type="Password" class="txt01 easyui-validatebox" /></td>
+	                    </tr>
+	                </table>
+                </form>
             </div>
             <div region="south" border="false" style="text-align: right; height: 30px; line-height: 30px;">
                 <a id="btnEp" class="easyui-linkbutton" icon="icon-ok" href="javascript:void(0)" >确定</a> 
