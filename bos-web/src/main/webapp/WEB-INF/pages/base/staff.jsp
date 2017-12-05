@@ -164,8 +164,19 @@
 				message: '手机号输入有误！' 
 			}
 			}); 
+		
+		//为保存按钮绑定事件
+		$("#save").click(function(){
+			//表单校验，如果通过，提交表单
+			var v = $("#addStaffForm").form("validate");
+			if(v){
+				//$("#addStaffForm").form("submit");
+				$("#addStaffForm").submit();
+			}
 		});
-	
+		
+	});
+
 </script>	
 
 
@@ -177,12 +188,12 @@
 	<div class="easyui-window" title="对收派员进行添加或者修改" id="addStaffWindow" collapsible="false" minimizable="false" maximizable="false" style="top:20px;left:200px">
 		<div region="north" style="height:31px;overflow:hidden;" split="false" border="false" >
 			<div class="datagrid-toolbar">
-				<a id="save" icon="icon-save" href="#" class="easyui-linkbutton" plain="true" >保存</a>
+				<a id="save" icon="icon-save" href="javascript:void(0)" class="easyui-linkbutton" plain="true" >保存</a>
 			</div>
 		</div>
 		
 		<div region="center" style="overflow:auto;padding:5px;" border="false">
-			<form>
+			<form id="addStaffForm" action="staffAction_add.action" accept="post">
 				<table class="table-edit" width="80%" align="center">
 					<tr class="title">
 						<td colspan="2">收派员信息</td>
@@ -199,7 +210,7 @@
 					<tr>
 						<td>手机</td>
 						<td>
-							<input type="text" name="telephone" class="easyui-validatebox" required="true" validType="'telephone'"/>
+							<input type="text" name="telephone" class="easyui-validatebox" required="true" data-options="validType:'telephone'"/>
 						</td>
 					</tr>
 					<tr>
