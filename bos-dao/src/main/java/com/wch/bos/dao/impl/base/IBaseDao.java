@@ -3,6 +3,8 @@ package com.wch.bos.dao.impl.base;
 import java.io.Serializable;
 import java.util.List;
 
+import com.wch.bos.utils.PageBean;
+
 
 public interface IBaseDao<T> {
 	
@@ -12,6 +14,6 @@ public interface IBaseDao<T> {
 	public T findById(Serializable id);
 	public List<T> findAll();
 	public void executeUpdate(String queryName,Object...objects);
-	
+	public void pageQuery(PageBean pageBean);
 	
 }

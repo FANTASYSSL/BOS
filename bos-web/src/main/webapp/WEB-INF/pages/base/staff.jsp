@@ -37,7 +37,27 @@
 	}
 	
 	function doDelete(){
-		alert("删除...");
+		var rows = $("#grid").datagrid("getSelections");		
+		 
+		if (rows.length == 0) {
+			$.messager.alert("提示信息","请选择需要删除的取派员！","warning");		
+		}else{
+			$.messager.confirm("删除确认","你确定要删除选中的取派员吗？",function(result){
+				if (result) {
+					
+					var array = new Array();
+					
+					for (var i = 0; i < rows.length; i++) {
+						var staff = rows[i];
+						var id = staff.id;
+						array.push(id);
+					}
+					var ids = array.join(",");
+					location.href = "staffAction_deleteBatch.action?ids="+ids;
+				}
+			})
+			
+		}
 	}
 	
 	function doRestore(){
@@ -129,7 +149,7 @@
 			pageList: [30,50,100],
 			pagination : true,
 			toolbar : toolbar,
-			url : "json/staff.json",
+			url : "staffAction_pageQuery.action",
 			idField : 'id',
 			columns : columns,
 			onDblClickRow : doDblClickRow
@@ -199,10 +219,10 @@
 						<td colspan="2">收派员信息</td>
 					</tr>
 					<!-- TODO 这里完善收派员添加 table -->
-					<tr>
+					<!-- <tr>
 						<td>取派员编号</td>
 						<td><input type="text" name="id" class="easyui-validatebox" required="true"/></td>
-					</tr>
+					</tr> -->
 					<tr>
 						<td>姓名</td>
 						<td><input type="text" name="name" class="easyui-validatebox" required="true"/></td>

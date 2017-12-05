@@ -10,14 +10,18 @@ import javax.annotation.Resource;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Projections;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
 import com.wch.bos.dao.impl.base.IBaseDao;
+import com.wch.bos.utils.PageBean;
 
 @SuppressWarnings("all")
 public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T> {
 
 	private Class<T> entityClass;
+	private List<?> findByCriteria;
 	
 	@Resource
 	private void setMySessionFactory(SessionFactory sessionFactory) {
@@ -65,6 +69,26 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T> {
 			query.setParameter(i++, object);
 		}
 		 query.executeUpdate();
+	}
+
+	@Override
+	public void pageQuery(PageBean pageBean) {
+		int currentPage = pageBean.getCurrentPage();
+		int pageSise = pageBean.getPageSize();
+		DetachedCriteria criteria = pageBean.getDetachedCriteria();
+		//
+		criteria.setProjection(Projections.rowCount());
+		List<Long> countList = (List<Long>) this.getHibernateTemplate().findByCriteria(criteria);
+		Long count = countList.get(0);
+		
+		pageBean.setTotal(count.intValue());
+		//
+		criteria.setProjection(null);
+		int firstResult = (currentPage - 1) * pageSise;
+		int maxResults = pageSise;
+		List rows = this.getHibernateTemplate().findByCriteria(criteria, firstResult, maxResults);
+		
+		pageBean.setRows(rows);
 	}
 
 }

@@ -10,6 +10,7 @@ import com.opensymphony.xwork2.ModelDriven;
 public class BaseAction<T> extends ActionSupport implements ModelDriven<T> {
 	
 	public static final String HOME = "home";
+	public static final String LIST = "list";
 	
 	protected T model;
 	
