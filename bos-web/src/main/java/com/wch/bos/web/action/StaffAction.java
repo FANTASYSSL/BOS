@@ -1,7 +1,9 @@
 package com.wch.bos.web.action;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.struts2.ServletActionContext;
 import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +61,13 @@ public class StaffAction extends BaseAction<Staff> {
 
 	public String deleteBatch() {
 		staffService.deleteBatch(ids);
+		return LIST;
+	}
+	
+	public String edit() throws IllegalAccessException, InvocationTargetException{
+		Staff staff = staffService.findStaffById(model.getId());
+		BeanUtils.copyProperties(staff, model);
+		staffService.update(staff);
 		return LIST;
 	}
 	

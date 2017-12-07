@@ -11,4 +11,8 @@ public interface IStaffService {
 
 	public void deleteBatch(String ids);
 
+	public Staff findStaffById(String id);
+
+	public void update(Staff staff);
+
 }

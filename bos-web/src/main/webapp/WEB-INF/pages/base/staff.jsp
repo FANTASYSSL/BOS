@@ -166,10 +166,24 @@
 	        resizable:false
 	    });
 		
+		$('#editStaffWindow').window({
+	        title: '修改取派员',
+	        width: 400,
+	        modal: true,//遮罩效果
+	        shadow: true,//阴影效果
+	        closed: true,//关闭
+	        height: 400,
+	        resizable:false
+	    });
+		
 	});
 
 	function doDblClickRow(rowIndex, rowData){
-		alert("双击表格数据...");
+		//alert("双击表格数据...");
+		$("#editStaffWindow").window("open");
+		
+		$("#editStaffForm").form("load",rowData);
+		
 	}
 	
 	/* 扩展手机号校验规则 */
@@ -195,8 +209,17 @@
 			}
 		});
 		
+		//为编辑按钮绑定事件
+		$("#edit").click(function(){
+			//表单校验，如果通过，提交表单
+			var v = $("#editStaffForm").form("validate");
+			if(v){
+				//$("#addStaffForm").form("submit");
+				$("#editStaffForm").submit();
+			}
+		});
 	});
-
+	
 </script>	
 
 
@@ -252,5 +275,50 @@
 			</form>
 		</div>
 	</div>
+	
+	<div class="easyui-window" title="对收派员进行添加或者修改" id="editStaffWindow" collapsible="false" minimizable="false" maximizable="false" style="top:20px;left:200px">
+		<div region="north" style="height:31px;overflow:hidden;" split="false" border="false" >
+			<div class="datagrid-toolbar">
+				<a id="edit" icon="icon-edit" href="javascript:void(0)" class="easyui-linkbutton" plain="true" >保存</a>
+			</div>
+		</div>
+		
+		<div region="center" style="overflow:auto;padding:5px;" border="false">
+			<form id="editStaffForm" action="staffAction_edit.action" accept="post">
+				<input type="hidden" name="id">
+				<table class="table-edit" width="80%" align="center">
+					<tr class="title">
+						<td colspan="2">收派员信息</td>
+					</tr>
+					<tr>
+						<td>姓名</td>
+						<td><input type="text" name="name" class="easyui-validatebox" required="true"/></td>
+					</tr>
+					<tr>
+						<td>手机</td>
+						<td>
+							<input type="text" name="telephone" class="easyui-validatebox" required="true" data-options="validType:'telephone'"/>
+						</td>
+					</tr>
+					<tr>
+						<td>单位</td>
+						<td><input type="text" name="station" class="easyui-validatebox" required="true"/></td>
+					</tr>
+					<tr>
+						<td colspan="2">
+						<input type="checkbox" name="haspda" value="1" />
+						是否有PDA</td>
+					</tr>
+					<tr>
+						<td>取派标准</td>
+						<td>
+							<input type="text" name="standard" class="easyui-validatebox" required="true"/>  
+						</td>
+					</tr>
+					</table>
+			</form>
+		</div>
+	</div>
+	
 </body>
 </html>	

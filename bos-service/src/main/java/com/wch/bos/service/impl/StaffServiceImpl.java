@@ -36,4 +36,15 @@ public class StaffServiceImpl implements IStaffService {
 		}
 	}
 
+	@Override
+	public Staff findStaffById(String id) {
+		Staff staff = staffDao.findById(id);
+		return staff;
+	}
+
+	@Override
+	public void update(Staff staff) {
+		staffDao.update(staff);
+	}
+
 }
