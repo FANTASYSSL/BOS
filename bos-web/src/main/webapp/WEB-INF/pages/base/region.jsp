@@ -26,6 +26,8 @@
 <script
 	src="${pageContext.request.contextPath }/js/easyui/locale/easyui-lang-zh_CN.js"
 	type="text/javascript"></script>
+<script src="${pageContext.request.contextPath }/js/jquery.ocupload-1.1.2.js" type="text/javascript"></script>
+
 <script type="text/javascript">
 	function doAdd(){
 		$('#addRegionWindow').window("open");
@@ -115,6 +117,11 @@
 			columns : columns,
 			onDblClickRow : doDblClickRow
 		});
+		/* 一键上传  */
+		$("#button-import").upload({
+			action:"regionAction_importXls.action",
+			name:"regionFile"
+		})
 		
 		// 添加、修改区域窗口
 		$('#addRegionWindow').window({
