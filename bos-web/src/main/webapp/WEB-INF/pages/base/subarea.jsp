@@ -216,15 +216,16 @@
 					<tr class="title">
 						<td colspan="2">分区信息</td>
 					</tr>
-					<tr>
+					<!-- <tr>
 						<td>分拣编码</td>
 						<td><input type="text" name="id" class="easyui-validatebox" required="true"/></td>
-					</tr>
+					</tr> -->
 					<tr>
 						<td>选择区域</td>
 						<td>
-							<input class="easyui-combobox" name="region.id"  
-    							data-options="valueField:'id',textField:'name',url:'json/standard.json'" />  
+							<input class="easyui-combobox" name="region.id"  data-options="
+    							valueField:'id',textField:'name',mode:'remote',
+    							url:'regionAction_listAjax.action'" />  
 						</td>
 					</tr>
 					<tr>

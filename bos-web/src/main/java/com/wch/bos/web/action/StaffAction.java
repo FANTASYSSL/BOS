@@ -15,8 +15,10 @@ import com.wch.bos.service.IStaffService;
 import com.wch.bos.utils.PageBean;
 import com.wch.bos.web.action.base.BaseAction;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
+import net.sf.json.test.JSONAssert;
 
 @Controller
 @Scope("prototype")
@@ -38,24 +40,8 @@ public class StaffAction extends BaseAction<Staff> {
 	} 
 	
 	public String pageQuery() throws IOException {
-		
-		PageBean pageBean = new PageBean();
-		pageBean.setCurrentPage(page);
-		pageBean.setPageSize(rows);
-		
-		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Staff.class);
-		pageBean.setDetachedCriteria(detachedCriteria);
-		
 		staffService.pageQuery(pageBean);
-		
-		JsonConfig jsonConfig = new JsonConfig();
-		jsonConfig.setExcludes(new String[]{"currentPage","detachedCriteria","pageSize"});
-		
-		String json = JSONObject.fromObject(pageBean,jsonConfig).toString();
-		
-		ServletActionContext.getResponse().setContentType("text/json;charset=utf-8");
-		ServletActionContext.getResponse().getWriter().println(json);
-		
+		this.java2Json(pageBean, new String[]{"currentPage","detachedCriteria","pageSize"});
 		return NONE;
 	}
 

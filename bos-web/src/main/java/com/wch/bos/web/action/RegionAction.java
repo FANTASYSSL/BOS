@@ -12,14 +12,20 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.struts2.ServletActionContext;
+import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.wch.bos.domain.Region;
 import com.wch.bos.service.IRegionService;
+import com.wch.bos.utils.PageBean;
 import com.wch.bos.utils.PinYin4jUtils;
 import com.wch.bos.web.action.base.BaseAction;
+
+import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
 @Controller
 @Scope("prototype")
 public class RegionAction extends BaseAction<Region> {
@@ -30,7 +36,9 @@ public class RegionAction extends BaseAction<Region> {
 	private IRegionService regionService;
 
 	private File regionFile;
-
+	
+	private String q;
+	
 	public String importXls() throws FileNotFoundException, IOException {
 		List<Region> regions = new ArrayList<>();
 		HSSFWorkbook hssfWorkbook = new HSSFWorkbook(new FileInputStream(regionFile));
@@ -64,10 +72,33 @@ public class RegionAction extends BaseAction<Region> {
 		return NONE;
 	}
 	
+	public String pageQuery() throws IOException{
+		regionService.pageQuery(pageBean);
+		this.java2Json(pageBean, new String[]{"currentPage","detachedCriteria","pageSize","subareas"});
+		return NONE;
+	}
 	
+	public String listAjax(){
+		List<Region> list = null;
+		if (StringUtils.isNotBlank(q)) {
+			list = regionService.findListByQ(q);
+		}else{
+			list = regionService.findAll();
+		}
+		this.java2Json(list,new String[]{"subareas"});
+		return NONE;
+	}
 	
 	public void setRegionFile(File regionFile) {
 		this.regionFile = regionFile;
 	}
-	
+
+	public String getQ() {
+		return q;
+	}
+
+	public void setQ(String q) {
+		this.q = q;
+	}
+
 }
