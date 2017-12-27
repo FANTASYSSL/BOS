@@ -123,6 +123,14 @@
 			name:"regionFile"
 		})
 		
+		$("#save").click(function(){
+			var flag = $("#addRegionForm").form("validate");
+			if (flag) {
+				alert(flag);
+				//$("#addRegionForm").submit();
+			}
+		});
+		
 		// 添加、修改区域窗口
 		$('#addRegionWindow').window({
 	        title: '添加修改区域',
@@ -148,12 +156,12 @@
 	<div class="easyui-window" title="区域添加修改" id="addRegionWindow" collapsible="false" minimizable="false" maximizable="false" style="top:20px;left:200px">
 		<div region="north" style="height:31px;overflow:hidden;" split="false" border="false" >
 			<div class="datagrid-toolbar">
-				<a id="save" icon="icon-save" href="#" class="easyui-linkbutton" plain="true" >保存</a>
+				<a id="save" icon="icon-save" href="javascript:void(0)" class="easyui-linkbutton" plain="true" >保存</a>
 			</div>
 		</div>
 		
 		<div region="center" style="overflow:auto;padding:5px;" border="false">
-			<form>
+			<form id="addRegionForm" action="regionAction_add.action" method="post">
 				<table class="table-edit" width="80%" align="center">
 					<tr class="title">
 						<td colspan="2">区域信息</td>

@@ -210,7 +210,7 @@
 		$("#btn").click(function(){
 			//将指定的form表单中所有的输入项转为json数据{key:value,key:value}
 			var p = $("#searchForm").serializeJson();
-			console.info(p);
+			//console.info(p);
 			//调用数据表格的load方法，重新发送一次ajax请求，并且提交参数
 			$("#grid").datagrid("load",p);
 			//关闭查询窗口

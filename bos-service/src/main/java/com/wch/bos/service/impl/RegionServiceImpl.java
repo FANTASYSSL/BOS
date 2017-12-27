@@ -40,4 +40,9 @@ public class RegionServiceImpl implements IRegionService {
 		return regionDao.findListByQ(q);
 	}
 
+	@Override
+	public void save(Region model) {
+		regionDao.save(model);
+	}
+
 }

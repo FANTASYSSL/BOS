@@ -39,6 +39,11 @@ public class RegionAction extends BaseAction<Region> {
 	
 	private String q;
 	
+	private String add(){
+		regionService.save(model);
+		return LIST;
+	}
+	
 	public String importXls() throws FileNotFoundException, IOException {
 		List<Region> regions = new ArrayList<>();
 		HSSFWorkbook hssfWorkbook = new HSSFWorkbook(new FileInputStream(regionFile));

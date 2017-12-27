@@ -15,4 +15,6 @@ public interface IRegionService{
 
 	public List<Region> findListByQ(String q);
 
+	public void save(Region model);
+
 }

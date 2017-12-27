@@ -1,5 +1,6 @@
 package com.wch.bos.web.action;
 
+import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,9 @@ public class SubareaAction extends BaseAction<Subarea> {
 	}
 	
 	public String pageQuery(){
+		DetachedCriteria criteria = pageBean.getDetachedCriteria();
+		String addresskey = model.getAddresskey();
+		
 		subareaService.pageQuery(pageBean);
 		this.java2Json(pageBean,new String[]{"currentPage","detachedCriteria","pageSize",
 				"decidedzone","subareas"});
