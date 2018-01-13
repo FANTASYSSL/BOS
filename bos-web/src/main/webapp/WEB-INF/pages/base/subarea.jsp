@@ -217,7 +217,6 @@
 			$("#searchWindow").window("close");
 		});
 		
-		
 	});
 
 	function doDblClickRow(){
