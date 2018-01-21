@@ -43,8 +43,10 @@
 		$('#searchWindow').window("open");
 	}
 	
+	//导出按钮对应的处理函数
 	function doExport(){
-		alert("导出");
+		//发送请求，请求Action，进行文件下载
+		window.location.href = "subareaAction_exportXls.action";
 	}
 	
 	function doImport(){
@@ -154,7 +156,7 @@
 		$('#grid').datagrid( {
 			iconCls : 'icon-forward',
 			fit : true,
-			border : true,
+			border : false,
 			rownumbers : true,
 			striped : true,
 			pageList: [30,50,100],
@@ -219,8 +221,12 @@
 		
 	});
 
-	function doDblClickRow(){
+	function doDblClickRow(rowIndex, rowData){
 		alert("双击表格数据...");
+		/* $("#editSubareaWindow").window("open");
+		
+		$("#editSubareaForm").form("load",rowData); */
+		
 	}
 	
 </script>	
@@ -296,6 +302,74 @@
 			</form>
 		</div>
 	</div>
+	
+	<!-- <div class="easyui-window" title="分区添加修改" id="editSubareaWindow" collapsible="false" minimizable="false" maximizable="false" style="top:20px;left:200px">
+		<div style="height:31px;overflow:hidden;" split="false" border="false" >
+			<div class="datagrid-toolbar">
+				<a id="edit" icon="icon-edit" href="javascript:void(0)" class="easyui-linkbutton" plain="true" >保存</a>
+				<script type="text/javascript">
+					$(function(){
+						$("#edit").click(function(){
+							//表单校验
+							var r = $("#editSubareaForm").form('validate');
+							if(r){
+								$("#editSubareaForm").submit();
+							}
+						});
+					});
+				</script>
+			</div>
+		</div>
+		
+		<div style="overflow:auto;padding:5px;" border="false">
+			<form id="editSubareaForm" action="subareaAction_edit.action" method="post">
+				<table class="table-edit" width="80%" align="center">
+					<tr class="title">
+						<td colspan="2">分区信息</td>
+					</tr>
+					<tr>
+						<td>分拣编码</td>
+						<td><input type="text" name="id" class="easyui-validatebox" required="true"/></td>
+					</tr>
+					<tr>
+						<td>选择区域</td>
+						<td>
+							<input class="easyui-combobox" name="region.id"  data-options="
+    							valueField:'id',textField:'name',mode:'remote',
+    							url:'regionAction_listAjax.action'" />  
+						</td>
+					</tr>
+					<tr>
+						<td>关键字</td>
+						<td><input type="text" name="addresskey" class="easyui-validatebox" required="true"/></td>
+					</tr>
+					<tr>
+						<td>起始号</td>
+						<td><input type="text" name="startnum" class="easyui-validatebox" required="true"/></td>
+					</tr>
+					<tr>
+						<td>终止号</td>
+						<td><input type="text" name="endnum" class="easyui-validatebox" required="true"/></td>
+					</tr>
+					<tr>
+						<td>单双号</td>
+						<td>
+							<select class="easyui-combobox" name="single" style="width:150px;">  
+							    <option value="0">单双号</option>  
+							    <option value="1">单号</option>  
+							    <option value="2">双号</option>  
+							</select> 
+						</td>
+					</tr>
+					<tr>
+						<td>位置信息</td>
+						<td><input type="text" name="position" class="easyui-validatebox" required="true" style="width:250px;"/></td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</div> -->
+	
 	<!-- 查询分区 -->
 	<div class="easyui-window" title="查询分区窗口" id="searchWindow" collapsible="false" minimizable="false" maximizable="false" style="top:20px;left:200px">
 		<div style="overflow:auto;padding:5px;" border="false">
