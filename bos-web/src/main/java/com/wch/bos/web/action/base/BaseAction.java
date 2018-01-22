@@ -10,7 +10,6 @@ import org.hibernate.criterion.DetachedCriteria;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
-import com.wch.bos.domain.Region;
 import com.wch.bos.utils.PageBean;
 
 import net.sf.json.JSONArray;

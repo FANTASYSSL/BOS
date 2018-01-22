@@ -83,7 +83,7 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T> {
 		
 		pageBean.setTotal(count.intValue());
 		//
-		criteria.setProjection(null);
+		criteria.setProjection(null);//清除条件
 		criteria.setResultTransformer(DetachedCriteria.ROOT_ENTITY);
 		int firstResult = (currentPage - 1) * pageSise;
 		int maxResults = pageSise;

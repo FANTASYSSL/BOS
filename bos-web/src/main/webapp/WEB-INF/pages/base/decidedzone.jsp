@@ -125,7 +125,7 @@
 			pageList: [30,50,100],
 			pagination : true,
 			toolbar : toolbar,
-			url : "json/decidedzone.json",
+			url : "decidedzoneAction_pageQuery.action",
 			idField : 'id',
 			columns : columns,
 			onDblClickRow : doDblClickRow
@@ -303,7 +303,7 @@
 					<tr>
 						<td>选择取派员</td>
 						<td>
-							<input class="easyui-combobox" name="region.id"  
+							<input class="easyui-combobox" name="staff.id"  
     							data-options="valueField:'id',textField:'name',
     							url:'staffAction_listajax.action'" />  
 						</td>
