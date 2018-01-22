@@ -1,5 +1,7 @@
 package com.wch.bos.service;
 
+import java.util.List;
+
 import com.wch.bos.domain.Staff;
 import com.wch.bos.utils.PageBean;
 
@@ -14,5 +16,7 @@ public interface IStaffService {
 	public Staff findStaffById(String id);
 
 	public void update(Staff staff);
+
+	public List<Staff> findListNotDelete();
 
 }

@@ -2,6 +2,7 @@ package com.wch.bos.web.action;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.struts2.ServletActionContext;
@@ -29,8 +30,8 @@ public class StaffAction extends BaseAction<Staff> {
 	@Autowired
 	private IStaffService staffService;
 	
-	private int page;
-	private int rows;
+/*	private int page;
+	private int rows;*/
 	
 	private String ids;
 	
@@ -57,7 +58,15 @@ public class StaffAction extends BaseAction<Staff> {
 		return LIST;
 	}
 	
-	public int getPage() {
+	public String listajax(){
+		List<Staff> list = staffService.findListNotDelete();
+		this.java2Json(list, new String[]{"decidedzones"});
+		return NONE;
+	}
+	
+	
+	
+	/*public int getPage() {
 		return page;
 	}
 
@@ -71,7 +80,7 @@ public class StaffAction extends BaseAction<Staff> {
 
 	public void setRows(int rows) {
 		this.rows = rows;
-	}
+	}*/
 
 	public String getIds() {
 		return ids;

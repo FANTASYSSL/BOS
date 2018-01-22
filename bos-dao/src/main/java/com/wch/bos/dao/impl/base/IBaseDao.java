@@ -3,6 +3,8 @@ package com.wch.bos.dao.impl.base;
 import java.io.Serializable;
 import java.util.List;
 
+import org.hibernate.criterion.DetachedCriteria;
+
 import com.wch.bos.utils.PageBean;
 
 
@@ -16,5 +18,5 @@ public interface IBaseDao<T> {
 	public List<T> findAll();
 	public void executeUpdate(String queryName,Object...objects);
 	public void pageQuery(PageBean pageBean);
-	
+	public List<T> findByCriteria(DetachedCriteria criteria);
 }
