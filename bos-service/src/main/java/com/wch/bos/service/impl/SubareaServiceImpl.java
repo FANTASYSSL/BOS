@@ -42,4 +42,11 @@ public class SubareaServiceImpl implements ISubareaService {
 		return subareaDao.findByCriteria(criteria);
 	}
 
+	@Override
+	public List<Subarea> findListByDecidedzoneId(String decidedzoneId) {
+		DetachedCriteria criteria = DetachedCriteria.forClass(Subarea.class);
+		criteria.add(Restrictions.eq("decidedzone.id", decidedzoneId));
+		return subareaDao.findByCriteria(criteria);
+	}
+
 }
