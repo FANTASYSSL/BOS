@@ -80,17 +80,20 @@
 				/css/** = anon
 				/images/** = anon
 				/js/** = anon
-				/login.jsp = anon
-				/validatecode.jsp = anon
+				/login.jsp* = anon
+				/validatecode.jsp* = anon
 				/page_base_staff.action = perms["staff-list"]
 				/* = authc
 			</value>
 		</property>
 	</bean>
 	
-	<bean id="securityManager" class="org.apache.shiro.mgt.DefaultSecurityManager">
-		<!-- <property name="" ref="" /> -->
+	<bean id="bosRealm" class="com.wch.bos.realm.BOSRealm" />
+	
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realm" ref="bosRealm" />
 	</bean>
+	
 	
 	
 						
