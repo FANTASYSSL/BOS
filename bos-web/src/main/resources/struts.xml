@@ -23,7 +23,12 @@
 		<!-- 全局结果集定义 -->
 		<global-results>
 			<result name="login">/login.jsp</result>
+			<result name="unauthorized">/unauthorized.jsp</result>
 		</global-results>
+	
+		<global-exception-mappings>
+			<exception-mapping result="unauthorized" exception="org.apache.shiro.authz.UnauthorizedException"></exception-mapping>
+		</global-exception-mappings>
 	
 		<!-- 需要进行权限控制的页面访问 -->
 		<action name="page_*_*">

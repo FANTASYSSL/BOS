@@ -52,6 +52,8 @@ public class UserAction extends BaseAction<User> {
 				subject.login(token);
 			} catch (AuthenticationException e) {
 				e.printStackTrace();
+//				UnknownAccountException，IncorrectCredentialsException
+				this.addActionError("用户名或密码不正确！");
 				return LOGIN;
 			}
 			User user = (User) subject.getPrincipal();

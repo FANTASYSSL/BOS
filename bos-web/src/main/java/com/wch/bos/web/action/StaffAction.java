@@ -5,6 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.struts2.ServletActionContext;
 import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +46,8 @@ public class StaffAction extends BaseAction<Staff> {
 		this.java2Json(pageBean, new String[]{"currentPage","detachedCriteria","pageSize","decidedzones"});
 		return NONE;
 	}
-
+	
+	@RequiresPermissions("staff-delete")
 	public String deleteBatch() {
 		staffService.deleteBatch(ids);
 		return LIST;
