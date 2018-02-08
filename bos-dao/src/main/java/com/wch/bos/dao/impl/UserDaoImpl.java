@@ -9,6 +9,7 @@ import com.wch.bos.dao.impl.base.impl.BaseDaoImpl;
 import com.wch.bos.domain.User;
 
 @Repository
+@SuppressWarnings("all")
 public class UserDaoImpl extends BaseDaoImpl<User> implements IUserDao {
 
 	@Override

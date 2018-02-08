@@ -9,6 +9,7 @@ import org.hibernate.criterion.DetachedCriteria;
  * @author zhaoqx
  *
  */
+@SuppressWarnings("all")
 public class PageBean {
 	private int currentPage;//当前页码
 	private int pageSize;//每页显示的记录数

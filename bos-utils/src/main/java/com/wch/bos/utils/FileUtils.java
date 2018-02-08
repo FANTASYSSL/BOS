@@ -5,6 +5,7 @@ import java.net.URLEncoder;
 
 import sun.misc.BASE64Encoder;
 
+@SuppressWarnings("all")
 public class FileUtils {
 		/**
 		 * 下载文件时，针对不同浏览器，进行附件名的编码

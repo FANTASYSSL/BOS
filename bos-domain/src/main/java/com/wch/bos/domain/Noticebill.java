@@ -7,11 +7,11 @@ import java.util.Set;
 /**
  * 业务通知单
  */
-
+@SuppressWarnings("all")
 public class Noticebill implements java.io.Serializable {
 
 	// Fields
-
+	private static final long serialVersionUID = 1L;
 	private String id;
 	private User user;
 	private Staff staff;

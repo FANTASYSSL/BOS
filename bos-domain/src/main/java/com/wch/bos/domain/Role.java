@@ -6,9 +6,10 @@ import java.util.Set;
 /**
  * 角色实体
  */
-
+@SuppressWarnings("all")
 public class Role implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
 	// Fields
 
 	private String id;

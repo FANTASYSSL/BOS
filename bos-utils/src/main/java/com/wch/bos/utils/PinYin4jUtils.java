@@ -8,6 +8,7 @@ import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
 import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 
+@SuppressWarnings("all")
 public class PinYin4jUtils {
 	/**
 	 * 将字符串转换成拼音数组

@@ -10,24 +10,18 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.struts2.ServletActionContext;
-import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.wch.bos.domain.Region;
 import com.wch.bos.service.IRegionService;
-import com.wch.bos.utils.PageBean;
 import com.wch.bos.utils.PinYin4jUtils;
 import com.wch.bos.web.action.base.BaseAction;
-
-import net.sf.json.JSONObject;
-import net.sf.json.JsonConfig;
 @Controller
 @Scope("prototype")
+@SuppressWarnings("all")
 public class RegionAction extends BaseAction<Region> {
 	
 	private static final long serialVersionUID = 1L;

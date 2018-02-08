@@ -9,6 +9,7 @@ import com.wch.bos.dao.impl.base.impl.BaseDaoImpl;
 import com.wch.bos.domain.Region;
 
 @Repository
+@SuppressWarnings("all")
 public class RegionDaoImpl extends BaseDaoImpl<Region> implements IRegionDao {
 
 	@Override

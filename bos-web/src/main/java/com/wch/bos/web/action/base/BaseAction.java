@@ -16,7 +16,7 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 
-@SuppressWarnings("serial")
+@SuppressWarnings("all")
 public class BaseAction<T> extends ActionSupport implements ModelDriven<T> {
 	
 	public static final String HOME = "home";

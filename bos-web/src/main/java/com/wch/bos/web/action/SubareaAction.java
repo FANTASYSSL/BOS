@@ -24,6 +24,7 @@ import com.wch.bos.web.action.base.BaseAction;
 
 @Controller
 @Scope("prototype")
+@SuppressWarnings("all")
 public class SubareaAction extends BaseAction<Subarea> {
 
 	private static final long serialVersionUID = 1L;

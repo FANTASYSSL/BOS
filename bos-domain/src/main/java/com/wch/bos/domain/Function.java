@@ -6,11 +6,12 @@ import java.util.Set;
 /**
  * 权限实体
  */
-
+@SuppressWarnings("all")
 public class Function implements java.io.Serializable {
 
 	// Fields
 
+	private static final long serialVersionUID = 1L;
 	private String id;
 	private Function parentFunction;//当前权限的上级权限
 	private String name;

@@ -6,24 +6,17 @@ import java.util.List;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.apache.struts2.ServletActionContext;
-import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.wch.bos.domain.Staff;
 import com.wch.bos.service.IStaffService;
-import com.wch.bos.utils.PageBean;
 import com.wch.bos.web.action.base.BaseAction;
-
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-import net.sf.json.JsonConfig;
-import net.sf.json.test.JSONAssert;
 
 @Controller
 @Scope("prototype")
+@SuppressWarnings("all")
 public class StaffAction extends BaseAction<Staff> {
 
 	private static final long serialVersionUID = 1L;
