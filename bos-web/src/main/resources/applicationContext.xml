@@ -65,9 +65,12 @@
 	<tx:annotation-driven/>
 	
 	<!-- 远程调用webservice -->
-	<jaxws:client id="crmClient" 
+	<!-- <jaxws:client id="crmClient" 
 				 address="http://192.168.0.103:8080/crm_wchservice/service/customer" 
-				 serviceClass="com.wch.bos.crm.ICustomerService"/>	
+				 serviceClass="com.wch.bos.crm.ICustomerService"/> -->	
+		<jaxws:client id="crmClient" 
+				 address="http://192.168.0.103:8080/crm_wchservice/service/customer" 
+				 serviceClass="com.wch.bos.crm.ICustomerService"/>
 	
 	<!-- shiro框架 -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
