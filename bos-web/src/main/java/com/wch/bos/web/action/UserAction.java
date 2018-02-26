@@ -102,6 +102,29 @@ public class UserAction extends BaseAction<User> {
 		return LOGIN;
 	}
 	
+	//属性驱动，接收多个角色id
+	private String[] roleIds;
+	public void setRoleIds(String[] roleIds) {
+		this.roleIds = roleIds;
+	}
+	
+	/**
+	 * 添加用户
+	 */
+	public String add(){
+		userService.save(model,roleIds);
+		return LIST;
+	}
+
+	/**
+	 * 用户数据分页查询
+	 */
+	public String pageQuery(){
+		userService.pageQuery(pageBean);
+		this.java2Json(pageBean, new String[]{"noticebills","roles"});
+		return NONE;
+	}
+	
 	public void setCheckCode(String checkCode) {
 		this.checkCode = checkCode;
 	}
