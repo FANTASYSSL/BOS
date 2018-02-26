@@ -12,7 +12,7 @@ public class BOSUtils {
 		return ServletActionContext.getRequest().getSession();
 	}
 	
-	public static User getLoinUser(){
+	public static User getLoginUser(){
 		Object object = getSession().getAttribute("loginUser");
 		return (User) (object == null?null:object);
 	}

@@ -12,7 +12,7 @@ public class BosLoginInterceptor extends MethodFilterInterceptor{
 	@Override
 	protected String doIntercept(ActionInvocation invocation) throws Exception {
 		
-		User user = BOSUtils.getLoinUser();
+		User user = BOSUtils.getLoginUser();
 		if (user == null) {
 			return "login";
 		}

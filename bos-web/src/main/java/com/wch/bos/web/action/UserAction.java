@@ -85,7 +85,7 @@ public class UserAction extends BaseAction<User> {
 	*/	
 	public String editPassword() throws IOException {
 		String flag = "1";
-		User user = BOSUtils.getLoinUser();
+		User user = BOSUtils.getLoginUser();
 		try {
 			userService.editPassword(user.getId(),model.getPassword());
 		} catch (Exception e) {

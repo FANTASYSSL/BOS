@@ -11,7 +11,6 @@ public class Function implements java.io.Serializable {
 
 	// Fields
 
-	private static final long serialVersionUID = 1L;
 	private String id;
 	private Function parentFunction;//当前权限的上级权限
 	private String name;
@@ -22,6 +21,24 @@ public class Function implements java.io.Serializable {
 	private Integer zindex;
 	private Set roles = new HashSet(0);//当前权限对应的多个角色
 	private Set children = new HashSet(0);//当前权限的下级权限
+	
+	public String getpId(){
+		if(parentFunction == null){
+			return "0";
+		}
+		return parentFunction.getId();
+	}
+	
+	public Function() {}
+	
+	public Function(String functionId) {
+		this.id = functionId;
+	}
+
+	public String getText(){
+		return name;
+	}
+	
 	public String getId() {
 		return id;
 	}

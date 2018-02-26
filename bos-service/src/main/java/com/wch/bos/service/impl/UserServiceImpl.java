@@ -1,32 +1,59 @@
 package com.wch.bos.service.impl;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.wch.bos.dao.IUserDao;
+import com.wch.bos.domain.Role;
 import com.wch.bos.domain.User;
 import com.wch.bos.service.IUserService;
 import com.wch.bos.utils.MD5Utils;
-
+import com.wch.bos.utils.PageBean;
 @Service
 @Transactional
-public class UserServiceImpl implements IUserService {
-
-	@Resource
+public class UserServiceImpl implements IUserService{
+	@Autowired
 	private IUserDao userDao;
-	
-	@Override
+	/***
+	 * 用户登录
+	 */
 	public User login(User user) {
+		//使用MD5加密密码
 		String password = MD5Utils.md5(user.getPassword());
-		return userDao.findUserByUsernameAndPassword(user.getUsername(), password);
+		return userDao.findUserByUsernameAndPassword(user.getUsername(),password);
 	}
-
-	@Override
+	/**
+	 * 根据用户id修改密码
+	 */
 	public void editPassword(String id, String password) {
+		//使用MD5加密密码
 		password = MD5Utils.md5(password);
-		userDao.executeUpdate("user.editPassword", password,id);
+		userDao.executeUpdate("user.editpassword", password,id);
+	}
+	
+	/**
+	 * 添加一个用户，同时关联角色
+	 */
+	public void save(User user, String[] roleIds) {
+		String password = user.getPassword();
+		password = MD5Utils.md5(password);
+		user.setPassword(password);
+		userDao.save(user);
+		if(roleIds != null && roleIds.length > 0){
+			for (String roleId : roleIds) {
+				//手动构造托管对象
+				Role role = new Role(roleId);
+				//用户对象关联角色对象
+				user.getRoles().add(role);
+			}
+		}
 	}
 
+	/**
+	 * 分页查询 
+	 */
+	public void pageQuery(PageBean pageBean) {
+		userDao.pageQuery(pageBean);
+	}
 }
