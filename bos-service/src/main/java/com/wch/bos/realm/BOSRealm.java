@@ -22,6 +22,7 @@ import com.wch.bos.domain.Function;
 import com.wch.bos.domain.Role;
 import com.wch.bos.domain.User;
 
+@SuppressWarnings("all")
 public class BOSRealm extends AuthorizingRealm {
 	
 	@Autowired
