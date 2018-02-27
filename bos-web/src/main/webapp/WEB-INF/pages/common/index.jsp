@@ -46,7 +46,7 @@
 		
 		// 基本功能菜单加载
 		$.ajax({
-			url : '${pageContext.request.contextPath}/json/menu.json',
+			url : '${pageContext.request.contextPath}/functionAction_findMenu.action',
 			type : 'POST',
 			dataType : 'text',
 			success : function(data) {
@@ -85,25 +85,32 @@
 		
 		$("#btnCancel").click(function(){
 			$('#editPwdWindow').window('close');
-		}); 
+		});
 		
+		//为确定按钮绑定事件
 		$("#btnEp").click(function(){
-			var e = $("#editPasswordForm").form("validate");
-			if (e) {
+			//进行表单校验
+			var v = $("#editPasswordForm").form("validate");
+			if(v){
+				//表单校验通过，手动校验两次输入是否一致
 				var v1 = $("#txtNewPass").val();
 				var v2 = $("#txtRePass").val();
-				if (v1 == v2) {
-					$.post("userAction_editPassword",{"password":v1},function(data){
-						if (data == '1') {
+				if(v1 == v2){
+					//两次输入一致，发送ajax请求
+					$.post("userAction_editPassword.action",{"password":v1},function(data){
+						if(data == '1'){
+							//修改成功，关闭修改密码窗口
 							$("#editPwdWindow").window("close");
-						} else {
-							$.messager.alert("提示信息","密码修改失败","error");
+						}else{
+							//修改密码失败，弹出提示
+							$.messager.alert("提示信息","密码修改失败！","error");
 						}
-					})
+					});
 				}else{
+					//两次输入不一致，弹出错误提示
 					$.messager.alert("提示信息","两次密码输入不一致！","warning");
 				}
-			}			
+			}
 		});
 	});
 
@@ -166,6 +173,7 @@
 	}
 	// 修改密码
 	function editPassword() {
+		//打开修改密码窗口
 		$('#editPwdWindow').window('open');
 	}
 	// 版权信息
@@ -173,6 +181,7 @@
 		$.messager.alert("宅急送 v1.0","管理员邮箱: zqx@itcast.cn");
 	}
 </script>
+
 </head>
 <body class="easyui-layout">
 	<div data-options="region:'north',border:false"
