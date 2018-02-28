@@ -26,6 +26,10 @@
 <script
 	src="${pageContext.request.contextPath }/js/easyui/locale/easyui-lang-zh_CN.js"
 	type="text/javascript"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/js/highcharts/highcharts.js"></script>	
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/js/highcharts/modules/exporting.js"></script>	
 <script type="text/javascript">
 	function doAdd(){
 		$('#addSubareaWindow').window("open");
@@ -84,6 +88,11 @@
 		text : '导出',
 		iconCls : 'icon-undo',
 		handler : doExport
+	},{
+		id : 'button-showHighcharts',
+		text : '显示区域分区分布图',
+		iconCls : 'icon-search',
+		handler : doShowHighcharts
 	}];
 	// 定义列
 	var columns = [ [ {
@@ -178,6 +187,15 @@
 	        height: 400,
 	        resizable:false
 	    });
+		//图
+		$('#showSubareaWindow').window({
+	        width: 800,
+	        modal: true,
+	        shadow: true,
+	        closed: true,
+	        height: 700,
+	        resizable:false
+	    });
 		
 		// 查询分区
 		$('#searchWindow').window({
@@ -227,6 +245,25 @@
 		
 		$("#editSubareaForm").form("load",rowData); */
 		
+	}
+	
+	function doShowHighcharts(){
+		$("#showSubareaWindow").window("open");
+		//页面加载完成后，动态创建图表
+		$.post("subareaAction_findSubareasGroupByProvince.action",function(data){
+			alert(data);
+			console.log(data);
+			$("#test").highcharts({
+				title: {
+		            text: '区域分区分布图'
+		        },
+		        series: [{
+		            type: 'pie',
+		            name: '区域分区分布图',
+		            data: data
+		        }]
+			});
+		});
 	}
 	
 </script>	
@@ -399,6 +436,13 @@
 					</tr>
 				</table>
 			</form>
+		</div>
+	</div>
+	
+	<!-- 用于展示图表 -->
+	<div class="easyui-window" title="区域分区分布图" id="showSubareaWindow" 
+		collapsible="false" minimizable="false" maximizable="false" style="top:20px;left:200px">
+		<div id="test"  split="false" border="false" >
 		</div>
 	</div>
 </body>
