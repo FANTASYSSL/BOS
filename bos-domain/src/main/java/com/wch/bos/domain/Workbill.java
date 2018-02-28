@@ -121,4 +121,11 @@ public class Workbill implements java.io.Serializable {
 		this.remark = remark;
 	}
 
+	@Override
+	public String toString() {
+		return "Workbill [id=" + id + ", noticebill=" + noticebill + ", staff=" + staff + ", type=" + type
+				+ ", pickstate=" + pickstate + ", buildtime=" + buildtime + ", attachbilltimes=" + attachbilltimes
+				+ ", remark=" + remark + "]";
+	}
+	
 }

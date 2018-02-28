@@ -20,7 +20,7 @@
 						http://cxf.apache.org/schemas/jaxws.xsd">
 
 	<!-- 加载属性文件 -->
-	<context:property-placeholder location="classpath:db.properties"/>
+	<context:property-placeholder location="classpath:db.properties,classpath:mail.properties"/>
 				
 	<!-- 配置数据源 -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
@@ -116,8 +116,33 @@
 	
 	<!-- 配置shiro框架提供的切面类，用于创建代理对象 -->
 	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor"/>
-
 	
+	<!-- 配置quartz -->
 	
+	<bean id="mailJob" class="com.wch.jobs.MailJob">
+		<property name="username" value="${mail.username}" />
+		<property name="password" value="${mail.password}" />
+		<property name="smtpServer" value="${mail.smtpServer}" />
+	</bean>		
+	
+	<bean id="jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="mailJob" />
+		<property name="targetMethod" value="execute" />
+	</bean>
+	
+	<bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="jobDetail" />
+		<property name="cronExpression">
+			<value>0 * * * * ?</value>
+		</property>
+	</bean>
+	
+	<bean id="schedulerFactory" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="cronTrigger"/>
+			</list>
+		</property>
+	</bean>
 						
 </beans>

@@ -43,6 +43,7 @@ public class MailJob {
 
 	public void execute() {
 		System.out.println("要发邮件了。。。" + new Date());
+		System.out.println(username+"#"+password+"#"+smtpServer);
 		try {
 			//查询工单类型为新单的所有工单
 			List<Workbill> list = workbillDao.findAll();
@@ -71,12 +72,14 @@ public class MailJob {
 					InternetAddress from = new InternetAddress(mailProps.getProperty("mail.username"));
 					message.setFrom(from);
 					// 设置收件人
-					InternetAddress to = new InternetAddress("test@itcast.cn");
+					InternetAddress to = new InternetAddress("948227209@qq.com");
 					message.setRecipient(RecipientType.TO, to);
 					// 设置邮件标题
-					message.setSubject("系统邮件：新单通知");
+					//message.setSubject("系统邮件：新单通知");
+					message.setSubject("你有一份新单通知，请速速查看");
 					// 设置邮件的内容体
-					message.setContent(workbill.toString(), "text/html;charset=UTF-8");
+					//message.setContent(workbill.toString(), "text/html;charset=UTF-8");
+					message.setContent("这是测试邮件！！！！", "text/html;charset=UTF-8");
 					// 发送邮件
 					Transport.send(message);
 				}
